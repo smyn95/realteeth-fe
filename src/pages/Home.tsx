@@ -1,5 +1,5 @@
-import { useMobileMenu } from '@/shared/hooks';
-import { Header, MainLayout, MobileMenuButton, MobileSidebar, Sidebar } from '@/shared/ui/layout';
+import { WeatherDetailsRoot } from '@/features/weather-details';
+import { Header, MainLayout, MobileMenuButton, MobileSidebar, Sidebar, useMobileMenu } from '@/shared';
 
 export default function Home() {
   const { isOpen, toggleMobileSidebar } = useMobileMenu();
@@ -14,7 +14,9 @@ export default function Home() {
         }
         sidebar={<Sidebar />}
       >
-        <main className="mx-auto md:max-w-3/4">main</main>
+        <main className="mx-auto md:max-w-3/4">
+          <WeatherDetailsRoot />
+        </main>
       </MainLayout>
 
       <MobileSidebar isOpen={isOpen} onOpenChange={toggleMobileSidebar}>
