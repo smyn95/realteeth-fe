@@ -1,2 +1,3 @@
 export { useMobileMenu } from './hooks';
-export { Header, MainLayout, MobileMenuButton, MobileSidebar, Sidebar } from './ui';
+export { useLocationStore } from './store/location-store';
+export { ErrorBoundary, ErrorFallback, Header, MainLayout, MobileMenuButton, MobileSidebar, Sidebar } from './ui';
