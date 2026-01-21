@@ -5,8 +5,12 @@ import { CardSkeleton } from './CardSkeleton';
 import { WeatherLayout } from './WeatherLayout';
 
 export function WeatherRoot() {
-  const { coordinates } = useLocationStore();
+  const { coordinates, locationError } = useLocationStore();
   const { requestLocation, isLoading, error } = useGeolocation(true);
+
+  if (locationError) {
+    return <ErrorFallback error={new Error(locationError)} onRetry={requestLocation} />;
+  }
 
   if (error) {
     return <ErrorFallback error={new Error(error)} onRetry={requestLocation} />;
