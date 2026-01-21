@@ -1,4 +1,4 @@
-export { fetchWeatherDetails } from './api/weather';
+export { fetchCurrentWeather } from './api/weather';
 export {
   capitalizeDescription,
   formatHumidity,

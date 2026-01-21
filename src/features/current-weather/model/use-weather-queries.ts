@@ -1,6 +1,6 @@
 import { useSuspenseQueries } from '@tanstack/react-query';
 import { type Coordinates, getLocationNameByCoords } from '@/entities/location';
-import { fetchWeatherDetails } from '@/entities/open-weather';
+import { fetchCurrentWeather } from '@/entities/open-weather';
 
 type WeatherQueryParams = {
   coordinates: Coordinates;
@@ -11,7 +11,7 @@ export function useWeatherQueries({ coordinates }: WeatherQueryParams) {
     queries: [
       {
         queryKey: ['weather-details', coordinates.lat, coordinates.lon],
-        queryFn: () => fetchWeatherDetails(coordinates.lat, coordinates.lon),
+        queryFn: () => fetchCurrentWeather(coordinates.lat, coordinates.lon),
         staleTime: 1000 * 60 * 5,
         gcTime: 1000 * 60 * 30,
       },

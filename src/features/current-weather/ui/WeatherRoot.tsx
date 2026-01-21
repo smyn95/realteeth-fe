@@ -1,10 +1,10 @@
 import { useGeolocation } from '@/features/select-location';
 import { ErrorBoundary, ErrorFallback, useLocationStore } from '@/shared';
 import { Suspense } from 'react';
-import { WeatherCardSkeleton } from './WeatherCardSkeleton';
-import { WeatherDetails } from './WeatherDetails';
+import { CardSkeleton } from './CardSkeleton';
+import { WeatherLayout } from './WeatherLayout';
 
-export function WeatherDetailsRoot() {
+export function WeatherRoot() {
   const { coordinates } = useLocationStore();
   const { requestLocation, isLoading, error } = useGeolocation(true);
 
@@ -15,15 +15,15 @@ export function WeatherDetailsRoot() {
   if (isLoading || !coordinates) {
     return (
       <div aria-busy="true" aria-live="polite">
-        <WeatherCardSkeleton />
+        <CardSkeleton />
       </div>
     );
   }
 
   return (
     <ErrorBoundary fallback={(err, reset) => <ErrorFallback error={err} onRetry={reset} />}>
-      <Suspense fallback={<WeatherCardSkeleton />}>
-        <WeatherDetails coordinates={coordinates} />
+      <Suspense fallback={<CardSkeleton />}>
+        <WeatherLayout coordinates={coordinates} />
       </Suspense>
     </ErrorBoundary>
   );

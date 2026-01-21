@@ -1,7 +1,7 @@
 import { capitalizeDescription, formatPop, getWeatherIconUrl, type Forecast } from '@/entities/open-weather';
 import { CloudRain } from 'lucide-react';
 
-export function Forecast({ forecast }: { forecast: Forecast[] }) {
+export function WeatherForecast({ forecast }: { forecast: Forecast[] }) {
   return (
     <section className="rounded-xl bg-[#292d47] p-4 text-white md:rounded-2xl md:p-6" aria-labelledby="forecast-heading">
       <h2 id="forecast-heading" className="mb-3 text-base font-semibold md:mb-4 md:text-lg">

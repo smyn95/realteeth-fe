@@ -1,4 +1,4 @@
-export function WeatherCardSkeleton() {
+export function CardSkeleton() {
   return (
     <div className="flex animate-pulse flex-col gap-6" aria-hidden="true">
       <div className="flex flex-col gap-3 md:gap-4">
