@@ -13,7 +13,7 @@ export function WeatherLayout({ coordinates }: Props) {
 
   return (
     <article className="flex flex-col gap-6">
-      <WeatherDisplay weather={weather} city={city} />
+      <WeatherDisplay weather={weather} city={city} coordinates={coordinates} />
       <WeatherForecast forecast={forecast} />
     </article>
   );

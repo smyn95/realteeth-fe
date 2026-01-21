@@ -1,17 +1,17 @@
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
 
-type LocationSearchInputProps = {
+type Props = {
   value: string;
   onChange: (value: string) => void;
   onFocus?: () => void;
   disabled?: boolean;
 };
 
-export function LocationSearchInput({ value, onChange, onFocus, disabled }: LocationSearchInputProps) {
+export function LocationSearchInput({ value, onChange, onFocus, disabled }: Props) {
   return (
     <div className="relative">
-      <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+      <Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" aria-hidden="true" />
       <Input
         type="search"
         value={value}
