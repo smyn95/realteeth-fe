@@ -69,7 +69,7 @@ export function WeatherDetailsOverview(props: Props) {
 
 function WeatherInfoItem({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <li className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md md:flex-col md:gap-4">
+    <li className="flex flex-col items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md md:gap-4">
       <div className="flex items-center gap-3">
         <div className="rounded-xl bg-white/10 p-2 text-blue-300">{icon}</div>
         <span className="text-sm text-white/60">{label}</span>
