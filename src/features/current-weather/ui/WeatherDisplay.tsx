@@ -1,3 +1,4 @@
+import type { Coordinates } from '@/entities/location';
 import {
   formatHumidity,
   formatTemperature,
@@ -7,15 +8,17 @@ import {
   getWeatherIconUrl,
   type Weather,
 } from '@/entities/open-weather';
+import { AddFavoriteButton } from '@/features/favorite';
 import { Droplets, MapPin, Sun, Sunrise, Sunset, Thermometer, Wind } from 'lucide-react';
 
 type Props = {
   weather: Weather;
   city: string;
+  coordinates: Coordinates;
 };
 
 export function WeatherDisplay(props: Props) {
-  const { weather, city } = props;
+  const { weather, city, coordinates } = props;
   const { description, icon, temperature, feelsLike, humidity, windSpeed, tempMin, tempMax, uvi, sunrise, sunset } = weather;
 
   return (
@@ -24,6 +27,7 @@ export function WeatherDisplay(props: Props) {
         <div className="flex items-center gap-2 text-lg text-white/90 md:text-xl">
           <MapPin className="size-5" aria-hidden="true" />
           <span className="font-medium">{city}</span>
+          <AddFavoriteButton coordinates={coordinates} locationName={city} />
         </div>
 
         <div className="relative">

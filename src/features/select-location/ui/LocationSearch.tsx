@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect, useRef } from 'react';
 import { useLocationSearch } from '../hooks/use-location-search';
 import { LocationSearchInput } from './LocationSearchInput';

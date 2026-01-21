@@ -1,5 +1,3 @@
-'use client';
-
 import { getCoordinatesByLocation, searchDistricts, formatDistrictName } from '@/entities/location';
 import { useDebounce, useLocationStore } from '@/shared';
 import { useState, useTransition } from 'react';
