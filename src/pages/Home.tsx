@@ -1,7 +1,27 @@
+import { WeatherDetailsRoot } from '@/features/weather-details';
+import { Header, MainLayout, MobileMenuButton, MobileSidebar, Sidebar, useMobileMenu } from '@/shared';
+
 export default function Home() {
-    return (
-        <>
-            <div>Home</div>
-        </>
-    )
+  const { isOpen, toggleMobileSidebar } = useMobileMenu();
+
+  return (
+    <>
+      <MainLayout
+        header={
+          <Header>
+            <MobileMenuButton onToggle={toggleMobileSidebar} />
+          </Header>
+        }
+        sidebar={<Sidebar />}
+      >
+        <main className="mx-auto md:max-w-3/4">
+          <WeatherDetailsRoot />
+        </main>
+      </MainLayout>
+
+      <MobileSidebar isOpen={isOpen} onOpenChange={toggleMobileSidebar}>
+        <Sidebar />
+      </MobileSidebar>
+    </>
+  );
 }
