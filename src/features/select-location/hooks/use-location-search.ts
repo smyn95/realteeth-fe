@@ -23,7 +23,7 @@ export function useLocationSearch(): UseLocationSearchReturn {
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  const { setCoordinates } = useLocationStore();
+  const { setLocation } = useLocationStore();
   const debouncedQuery = useDebounce(query);
 
   const results = searchDistricts(debouncedQuery, koreaDistricts);
@@ -37,10 +37,9 @@ export function useLocationSearch(): UseLocationSearchReturn {
     startTransition(async () => {
       try {
         const coords = await getCoordinatesByLocation(displayName);
-        setCoordinates(coords);
+        setLocation(coords, displayName);
       } catch {
         setError('해당 장소의 정보가 제공되지 않습니다.');
-        setCoordinates(null);
       }
     });
   };

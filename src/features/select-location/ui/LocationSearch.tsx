@@ -6,8 +6,7 @@ import { LocationSearchInput } from './LocationSearchInput';
 import { LocationSearchResults } from './LocationSearchResults';
 
 export function LocationSearch() {
-  const { query, setQuery, results, isOpen, setIsOpen, isSelecting, error, handleSelect, formatDisplay } =
-    useLocationSearch();
+  const { query, setQuery, results, isOpen, setIsOpen, isSelecting, error, handleSelect, formatDisplay } = useLocationSearch();
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -24,24 +23,14 @@ export function LocationSearch() {
 
   return (
     <div ref={containerRef} className="relative">
-      <LocationSearchInput
-        value={query}
-        onChange={setQuery}
-        onFocus={() => query.length > 0 && setIsOpen(true)}
-        disabled={isSelecting}
-      />
-      <LocationSearchResults
-        results={results}
-        onSelect={handleSelect}
-        formatDisplay={formatDisplay}
-        isVisible={isOpen}
-      />
+      <LocationSearchInput value={query} onChange={setQuery} onFocus={() => query.length > 0 && setIsOpen(true)} disabled={isSelecting} />
+      <LocationSearchResults results={results} onSelect={handleSelect} formatDisplay={formatDisplay} isVisible={isOpen} />
       {error && (
-        <p role="alert" className="mt-2 text-sm text-destructive">
+        <p role="alert" className="text-destructive mt-2 text-sm">
           {error}
         </p>
       )}
-      {isSelecting && <p className="mt-2 text-sm text-muted-foreground">위치 정보를 불러오는 중...</p>}
+      {isSelecting && <p className="text-muted-foreground mt-2 text-sm">위치 정보를 불러오는 중...</p>}
     </div>
   );
 }
