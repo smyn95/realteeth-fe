@@ -50,3 +50,22 @@ export async function getLocationNameByCoords(lat: number, lon: number): Promise
 
   return [region_1depth_name, region_2depth_name, region_3depth_name].filter(Boolean).join(' ');
 }
+
+/**
+ * 주소 검색 API (정확한 주소 검색)
+ */
+export async function searchAddressList(query: string): Promise<LocationSearchResult[]> {
+  if (!query.trim()) return [];
+
+  const data = await request<LocationApiResponse<AddressDocument>>('/v2/local/search/address.json', {
+    query,
+    size: '10',
+  });
+
+  return data.documents.map((doc) => ({
+    displayName: doc.address_name,
+    fullAddress: doc.address_name,
+    lat: Number(doc.y),
+    lon: Number(doc.x),
+  }));
+}

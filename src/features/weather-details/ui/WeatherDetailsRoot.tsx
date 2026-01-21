@@ -1,4 +1,4 @@
-import { useGeolocation } from '@/features/location';
+import { useGeolocation } from '@/features/select-location';
 import { ErrorBoundary, ErrorFallback, useLocationStore } from '@/shared';
 import { Suspense } from 'react';
 import { WeatherCardSkeleton } from './WeatherCardSkeleton';

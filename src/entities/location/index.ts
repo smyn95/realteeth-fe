@@ -1,2 +1,2 @@
 export type { Coordinates, LocationSearchResult } from './model/types';
-export { getCoordinatesByLocation, getLocationNameByCoords } from './api/location-api';
+export { getCoordinatesByLocation, getLocationNameByCoords, searchAddressList } from './api/location-api';
