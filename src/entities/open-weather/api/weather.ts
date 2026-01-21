@@ -11,7 +11,7 @@ type OneCallResponse = {
   daily: OneCallDailyResponse[];
 };
 
-export async function fetchWeatherDetails(lat: number, lon: number): Promise<WeatherData> {
+export async function fetchCurrentWeather(lat: number, lon: number): Promise<WeatherData> {
   const response = await request<OneCallResponse>('/data/3.0/onecall', {
     lat,
     lon,

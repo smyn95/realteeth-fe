@@ -1,23 +1,24 @@
 import { useSuspenseQueries } from '@tanstack/react-query';
 import { type Coordinates, getLocationNameByCoords } from '@/entities/location';
-import { fetchWeatherDetails } from '@/entities/open-weather';
+import { fetchCurrentWeather } from '@/entities/open-weather';
 
 type WeatherQueryParams = {
   coordinates: Coordinates;
+  locationName: string | null;
 };
 
-export function useWeatherQueries({ coordinates }: WeatherQueryParams) {
+export function useWeatherQueries({ coordinates, locationName }: WeatherQueryParams) {
   const [weatherDataQuery, cityQuery] = useSuspenseQueries({
     queries: [
       {
         queryKey: ['weather-details', coordinates.lat, coordinates.lon],
-        queryFn: () => fetchWeatherDetails(coordinates.lat, coordinates.lon),
+        queryFn: () => fetchCurrentWeather(coordinates.lat, coordinates.lon),
         staleTime: 1000 * 60 * 5,
         gcTime: 1000 * 60 * 30,
       },
       {
-        queryKey: ['city', coordinates.lat, coordinates.lon],
-        queryFn: () => getLocationNameByCoords(coordinates.lat, coordinates.lon),
+        queryKey: ['city', coordinates.lat, coordinates.lon, locationName],
+        queryFn: () => (locationName ? locationName : getLocationNameByCoords(coordinates.lat, coordinates.lon)),
         staleTime: Infinity,
         gcTime: 1000 * 60 * 60,
       },

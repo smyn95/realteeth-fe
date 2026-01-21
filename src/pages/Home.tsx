@@ -1,4 +1,4 @@
-import { WeatherDetailsRoot } from '@/features/weather-details';
+import { WeatherRoot } from '@/features/current-weather';
 import { Header, MainLayout, MobileMenuButton, MobileSidebar, Sidebar, useMobileMenu } from '@/shared';
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
         sidebar={<Sidebar />}
       >
         <main className="mx-auto md:max-w-3/4">
-          <WeatherDetailsRoot />
+          <WeatherRoot />
         </main>
       </MainLayout>
 

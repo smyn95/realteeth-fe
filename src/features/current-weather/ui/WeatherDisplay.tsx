@@ -14,7 +14,7 @@ type Props = {
   city: string;
 };
 
-export function WeatherDetailsOverview(props: Props) {
+export function WeatherDisplay(props: Props) {
   const { weather, city } = props;
   const { description, icon, temperature, feelsLike, humidity, windSpeed, tempMin, tempMax, uvi, sunrise, sunset } = weather;
 

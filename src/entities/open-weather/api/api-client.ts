@@ -24,8 +24,7 @@ export async function request<T>(endpoint: string, params: Record<string, string
       code: response.status,
     };
 
-    if (response.status === 401) error.message = '인증에 실패했습니다.';
-    if (response.status === 429) error.message = '요청 한도를 초과했습니다. 잠시 후 다시 시도해주세요.';
+    error.message = '날씨 정보를 가져오는데 실패했습니다.';
 
     throw error;
   }
