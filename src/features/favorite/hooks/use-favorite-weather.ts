@@ -1,5 +1,5 @@
 import type { FavoriteLocation } from '@/entities/favorite';
-import { fetchCurrentWeather, type Weather } from '@/entities/open-weather';
+import { fetchWeatherData, type Weather } from '@/entities/open-weather';
 import { useSuspenseQueries } from '@tanstack/react-query';
 
 type FavoriteWeather = {
@@ -11,7 +11,7 @@ export function useFavoriteWeather(favorites: FavoriteLocation[]): FavoriteWeath
   const queries = useSuspenseQueries({
     queries: favorites.map((favorite) => ({
       queryKey: ['favorite-weather', favorite.coordinates.lat, favorite.coordinates.lon],
-      queryFn: () => fetchCurrentWeather(favorite.coordinates.lat, favorite.coordinates.lon),
+      queryFn: () => fetchWeatherData(favorite.coordinates.lat, favorite.coordinates.lon),
       staleTime: 1000 * 60 * 5,
       gcTime: 1000 * 60 * 30,
     })),

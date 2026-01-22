@@ -1,4 +1,4 @@
-import type { Forecast, OneCallCurrentResponse, OneCallDailyResponse, Weather } from '../model/types';
+import type { Forecast, CurrentResponse, DailyResponse, Weather, HourlyResponse, HourlyForecast } from '../model/types';
 
 export function getWeatherIconUrl(iconCode: string): string {
   return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
@@ -44,7 +44,7 @@ export function formatPop(pop: number): string {
   return `${Math.round(pop * 100)}%`;
 }
 
-export function transformDaily(daily: OneCallDailyResponse[]): Forecast[] {
+export function transformDaily(daily: DailyResponse[]): Forecast[] {
   const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
 
   return daily.slice(1, 8).map((item) => {
@@ -59,11 +59,30 @@ export function transformDaily(daily: OneCallDailyResponse[]): Forecast[] {
       description: item.weather[0].description,
       icon: item.weather[0].icon,
       pop: item.pop,
+      sunrise: item.sunrise,
+      sunset: item.sunset,
+      humidity: item.humidity,
+      windSpeed: item.wind_speed,
+      uvi: item.uvi,
+      temp: {
+        day: Math.round(item.temp.day),
+        min: Math.round(item.temp.min),
+        max: Math.round(item.temp.max),
+        night: Math.round(item.temp.night),
+        eve: Math.round(item.temp.eve),
+        morn: Math.round(item.temp.morn),
+      },
+      feelsLike: {
+        day: Math.round(item.feels_like.day),
+        night: Math.round(item.feels_like.night),
+        eve: Math.round(item.feels_like.eve),
+        morn: Math.round(item.feels_like.morn),
+      },
     };
   });
 }
 
-export function transformCurrent(current: OneCallCurrentResponse, daily: OneCallDailyResponse[]): Weather {
+export function transformCurrent(current: CurrentResponse, daily: DailyResponse[]): Weather {
   const todayForecast = daily[0];
 
   return {
@@ -79,4 +98,29 @@ export function transformCurrent(current: OneCallCurrentResponse, daily: OneCall
     sunrise: current.sunrise,
     sunset: current.sunset,
   };
+}
+
+export function transformHourly(hourly: HourlyResponse[]): HourlyForecast[] {
+  return hourly.slice(0, 24).map((item, index) => {
+    const dateObj = new Date(item.dt * 1000);
+    const hours = dateObj.getHours();
+
+    let timeLabel = '';
+    if (index === 0) {
+      timeLabel = '지금';
+    } else {
+      const ampm = hours >= 12 ? '오후' : '오전';
+      const displayHour = hours % 12 || 12;
+      timeLabel = `${ampm} ${displayHour}시`;
+    }
+
+    return {
+      time: timeLabel,
+      dt: item.dt,
+      temp: Math.round(item.temp),
+      icon: item.weather[0].icon,
+      pop: Math.round(item.pop * 100),
+      description: item.weather[0].description,
+    };
+  });
 }

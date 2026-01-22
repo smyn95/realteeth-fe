@@ -24,10 +24,7 @@ export async function request<T>(endpoint: string, params: Record<string, string
       code: response.status,
     };
 
-    error.message = '날씨 정보를 가져오는데 실패했습니다.';
-
     throw error;
   }
-
   return response.json() as Promise<T>;
 }

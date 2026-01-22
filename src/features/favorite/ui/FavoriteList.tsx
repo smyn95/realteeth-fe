@@ -1,9 +1,9 @@
 import { Badge } from '@/components/ui/badge';
 import type { FavoriteLocation } from '@/entities/favorite';
 import { MAX_FAVORITES } from '@/entities/favorite';
-import { useLocationStore } from '@/shared/store/location-store';
 import { Star } from 'lucide-react';
 import { Suspense, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useFavoriteActions } from '../hooks/use-favorite-actions';
 import { useFavoriteWeather } from '../hooks/use-favorite-weather';
 import { EditNameModal } from './EditNameModal';
@@ -66,7 +66,13 @@ type FavoriteCardListProps = {
 
 function FavoriteCardList({ favorites, onEdit, onDelete }: FavoriteCardListProps) {
   const weatherData = useFavoriteWeather(favorites);
-  const { setLocation } = useLocationStore();
+  const navigate = useNavigate();
+
+  const handleCardClick = (favorite: FavoriteLocation) => {
+    const { lat, lon } = favorite.coordinates;
+    const encodedName = encodeURIComponent(favorite.name);
+    navigate(`/weather/${lat}/${lon}?name=${encodedName}`);
+  };
 
   return (
     <ul className="grid grid-cols-1 gap-3">
@@ -79,7 +85,7 @@ function FavoriteCardList({ favorites, onEdit, onDelete }: FavoriteCardListProps
             <FavoriteCard
               favorite={favorite}
               weather={weather.weather}
-              onClick={() => setLocation(favorite.coordinates, favorite.name)}
+              onClick={() => handleCardClick(favorite)}
               onEdit={() => onEdit(favorite)}
               onDelete={() => onDelete(favorite.id)}
             />
