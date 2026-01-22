@@ -5,10 +5,12 @@ import { WeatherDisplay } from './WeatherDisplay';
 
 type Props = {
   coordinates: Coordinates;
+  locationName?: string;
 };
 
-export function WeatherLayout({ coordinates }: Props) {
-  const { locationName } = useLocationStore();
+export function WeatherLayout({ coordinates, locationName: propsLocationName }: Props) {
+  const { locationName: storeLocationName } = useLocationStore();
+  const locationName = propsLocationName ?? storeLocationName;
   const { weather, forecast, city } = useWeatherQueries({ coordinates, locationName });
 
   return (
