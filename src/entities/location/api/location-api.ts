@@ -29,7 +29,7 @@ export async function getCoordinatesByLocation(address: string): Promise<Coordin
   }
 
   const { x, y } = data.documents[0];
-  return { lat: Number(y), lon: Number(x) };
+  return { lat: Number(Number(y).toFixed(2)), lon: Number(Number(x).toFixed(2)) };
 }
 
 /**

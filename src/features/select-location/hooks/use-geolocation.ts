@@ -31,7 +31,10 @@ export function useGeolocation(autoDetect = false) {
       (position) => {
         const { latitude, longitude } = position.coords;
 
-        setCoordinates({ lat: latitude, lon: longitude });
+        const lat = Number(latitude.toFixed(2));
+        const lon = Number(longitude.toFixed(2));
+
+        setCoordinates({ lat, lon });
 
         setStatus({ isLoading: false, error: null });
       },

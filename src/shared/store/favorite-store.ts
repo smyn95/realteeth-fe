@@ -1,11 +1,5 @@
 import type { Coordinates } from '@/entities/location';
-import {
-  canAddFavorite,
-  createFavoriteLocation,
-  isDuplicateFavorite,
-  isValidName,
-  type FavoriteLocation,
-} from '@/entities/favorite';
+import { canAddFavorite, createFavoriteLocation, isDuplicateFavorite, isValidName, type FavoriteLocation } from '@/entities/favorite';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -60,6 +54,6 @@ export const useFavoriteStore = create<FavoriteState>()(
     }),
     {
       name: 'favorite-locations',
-    }
-  )
+    },
+  ),
 );

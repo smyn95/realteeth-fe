@@ -31,6 +31,7 @@ export function useLocationSearch(): UseLocationSearchReturn {
     startTransition(async () => {
       try {
         const coords = await getCoordinatesByLocation(displayName);
+
         setLocation(coords, displayName);
       } catch {
         setLocationError('해당 장소의 정보가 제공되지 않습니다.');
